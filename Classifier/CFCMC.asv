@@ -36,10 +36,10 @@ classdef CFCMC
             % clustering each class and find optimal number of cluster for
             % each class, could be 'CalinskiHarabasz', 'Silhouette', 'gap' or 'DaviesBouldin'.
             
-            disp('Clustering data');
-            obj.ClusterIndexes = intraClassClustering(trainPatterns, 'Silhouette', [1:3]);
+            %disp('Clustering data');
+            %obj.ClusterIndexes = intraClassClustering(trainPatterns, 'Silhouette', [1:3]);
             
-            %obj.ClusterIndexes = trainPatterns(:,end); % if you want to
+            obj.ClusterIndexes = trainPatterns(:,end); % if you want to
             %set for each class one cluster
             
             % extract indexes of all clusters and their corensponding
@@ -335,8 +335,8 @@ classdef CFCMC
                 mLow = 0.7;
                 % sometimes you have to play with these values
                 % not always data follow the assumptions
-                %mHigh = 0.4;
-                mHigh = 2.5;
+                mHigh = 0.4;
+                %mHigh = 2.5;
                 if(maxMembs(i)<kConstant)
                     radiuses(i) = obj.Awidth(i)*(kConstant/maxMembs(i))^mLow;
                 else
@@ -400,11 +400,11 @@ classdef CFCMC
             midThreshold = (maxFoM - certaintyThreshold) / 2 + certaintyThreshold;
             
             if(value<certaintyThreshold)
-                semanticFoM = 'no';
+                semanticFoM = "certain prediction";
             elseif(value >=certaintyThreshold && value<midThreshold)
-                semanticFoM = 'low';
+                semanticFoM = "low";
             elseif(value >=midThreshold)
-                semanticFoM = 'high';
+                semanticFoM = "high";
             end
             
         end
